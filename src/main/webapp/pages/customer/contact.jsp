@@ -23,8 +23,8 @@
             <h2>Support hours</h2>
             <p class="muted">Monday - Friday, 9am - 5pm (local time)</p>
             <p>Email: support@glowvia.com</p>
-            <p>Phone: 01-4212222</p>
-            <p>Office: Kamalpokhari, Kathmandu, Nepal</p>
+            <p>Phone: +1 (555) 010-2026</p>
+            <p>Office: 42 Beauty Lane, Suite 5, Pokhara, Nepal</p>
         </div>
 
         <div class="card">

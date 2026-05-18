@@ -94,6 +94,85 @@
             </c:if>
         </div>
     </div>
+
+    <!-- Reviews section -->
+    <div class="reviews-section" style="margin-top: 40px;">
+        <h2>Customer Reviews</h2>
+
+        <!-- Show success message if any -->
+        <c:if test="${not empty sessionScope.success}">
+            <div class="toast toast-success">${sessionScope.success}</div>
+            <c:remove var="success" scope="session"/>
+        </c:if>
+
+        <!-- Show error message if any -->
+        <c:if test="${not empty sessionScope.error}">
+            <div class="toast toast-error">${sessionScope.error}</div>
+            <c:remove var="error" scope="session"/>
+        </c:if>
+
+        <!-- Add review form - only show if user is logged in and has not reviewed yet -->
+        <c:if test="${not empty sessionScope.currentUser && !hasReviewed}">
+            <div class="card" style="margin-bottom: 20px;">
+                <h3>Write a Review</h3>
+                <form method="post" action="${pageContext.request.contextPath}/review/add">
+                    <input type="hidden" name="productId" value="${product.id}"/>
+
+                    <!-- Rating dropdown -->
+                    <div class="form-row">
+                        <label for="rating">Rating</label>
+                        <select id="rating" name="rating" required>
+                            <option value="5">⭐⭐⭐⭐⭐ - Excellent</option>
+                            <option value="4">⭐⭐⭐⭐ - Good</option>
+                            <option value="3">⭐⭐⭐ - Average</option>
+                            <option value="2">⭐⭐ - Poor</option>
+                            <option value="1">⭐ - Terrible</option>
+                        </select>
+                    </div>
+
+                    <!-- Comment field -->
+                    <div class="form-row">
+                        <label for="comment">Comment</label>
+                        <textarea id="comment" name="comment" rows="3"
+                                  placeholder="Share your experience..."></textarea>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">Submit Review</button>
+                </form>
+            </div>
+        </c:if>
+
+        <!-- Show message if user already reviewed -->
+        <c:if test="${not empty sessionScope.currentUser && hasReviewed}">
+            <div class="toast toast-success" style="margin-bottom: 20px;">
+                You have already reviewed this product!
+            </div>
+        </c:if>
+
+        <!-- Show all reviews -->
+        <c:forEach var="review" items="${reviews}">
+            <div class="card" style="margin-bottom: 15px;">
+                <!-- Reviewer name and rating -->
+                <div style="display: flex; justify-content: space-between;">
+                    <strong>${review.get('fullName')}</strong>
+                    <span>
+                        <c:forEach begin="1" end="${review.get('rating')}" var="star">⭐</c:forEach>
+                    </span>
+                </div>
+                <!-- Review comment -->
+                <p style="margin-top: 8px;">${review.get('comment')}</p>
+                <!-- Review date -->
+                <small class="muted">${review.get('createdAt')}</small>
+            </div>
+        </c:forEach>
+
+        <!-- Show message if no reviews yet -->
+        <c:if test="${empty reviews}">
+            <div class="empty-msg">
+                No reviews yet. Be the first to review this product!
+            </div>
+        </c:if>
+    </div>
 </section>
 
 <jsp:include page="/includes/customer_footer.jsp"/>

@@ -45,24 +45,24 @@
             </thead>
             <tbody>
                 <!-- Loop through all order items and display them -->
-                <c:forEach var="item" items="${order.items}">
+                <c:forEach var="item" items="${orderItems}">
                     <tr>
                         <!-- Product name -->
-                        <td>${item.productName}</td>
+                        <td>${item.get('productName')}</td>
 
                         <!-- Quantity -->
-                        <td>${item.quantity}</td>
+                        <td>${item.get('quantity')}</td>
 
                         <!-- Unit price -->
-                        <td>NPR ${item.priceAtPurchase}</td>
+                        <td>NPR ${item.get('priceAtPurchase')}</td>
 
                         <!-- Line total -->
-                        <td>NPR ${item.lineTotal}</td>
+                        <td>NPR ${item.get('lineTotal')}</td>
                     </tr>
                 </c:forEach>
 
                 <!-- Show message if no items found -->
-                <c:if test="${empty order.items}">
+                <c:if test="${empty orderItems}">
                     <tr>
                         <td colspan="4" class="empty-cell">
                             No items found.

@@ -91,6 +91,11 @@
                        required minlength="6"/>
             </div>
 
+            <!-- Profile image field -->
+            <div class="form-row form-row-full">
+                <label for="image">Profile Image (optional)</label>
+                <input id="image" name="image" type="file" accept="image/*"/>
+            </div>
 
             <!-- Submit button -->
             <div class="form-row form-row-full">

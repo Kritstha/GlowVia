@@ -1,14 +1,19 @@
 package com.glowvia.controller;
 
 import com.glowvia.model.Product;
+import com.glowvia.model.User;
 import com.glowvia.service.ProductService;
+import com.glowvia.service.ReviewService;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
+import java.util.List;
+import java.util.Map;
 
 @WebServlet("/product")
 public class ProductDetailController extends HttpServlet {
@@ -40,9 +45,29 @@ public class ProductDetailController extends HttpServlet {
 
             // If product found show the product detail page
             if (selectedProduct != null) {
+
+                // Get reviews for this product from the database
+                ReviewService reviewService = new ReviewService();
+                List<Map<String, Object>> reviews = reviewService.getReviewsByProductId(productId);
+
+                // Check if current user is logged in
+                HttpSession session = request.getSession();
+                User currentUser = (User) session.getAttribute("currentUser");
+
+                // Check if user has already reviewed this product
+                boolean hasReviewed = false;
+                if (currentUser != null) {
+                    hasReviewed = reviewService.hasUserReviewed(productId, currentUser.getId());
+                }
+
+                // Pass all data to the product detail page
                 request.setAttribute("product", selectedProduct);
+                request.setAttribute("reviews", reviews);
+                request.setAttribute("hasReviewed", hasReviewed);
                 request.setAttribute("pageTitle", selectedProduct.getName() + " - Glowvia");
+
                 request.getRequestDispatcher("/pages/customer/product_detail.jsp").forward(request, response);
+
             } else {
                 // If product not found redirect to products page
                 response.sendRedirect(request.getContextPath() + "/products");
