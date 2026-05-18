@@ -1,0 +1,108 @@
+/* =====================================================
+   Glowvia - admin stylesheet (overrides + sidebar layout)
+   ===================================================== */
+
+.admin-body { background: #f4ece0; }
+
+.admin-shell {
+    display: grid;
+    grid-template-columns: 240px 1fr;
+    min-height: 100vh;
+}
+
+.admin-sidebar {
+    background: #2f2a26;
+    color: #f1e7d8;
+    padding: 24px 18px;
+    display: flex; flex-direction: column;
+    position: sticky; top: 0; height: 100vh;
+}
+
+.admin-sidebar .admin-brand {
+    color: #f4dcc8;
+    font-family: Georgia, serif;
+    font-size: 1.25rem; font-weight: 700;
+    display: inline-flex; align-items: center; gap: 8px;
+    text-decoration: none; margin-bottom: 28px;
+}
+
+.admin-nav {
+    display: flex; flex-direction: column;
+    gap: 4px; flex: 1;
+}
+.admin-nav a {
+    color: #d9c9b5;
+    padding: 9px 12px; border-radius: 6px;
+    font-size: .9rem;
+}
+.admin-nav a:hover {
+    background: #3d362f; color: #fff;
+    text-decoration: none;
+}
+
+.admin-foot {
+    border-top: 1px solid #4a423b;
+    padding-top: 14px;
+    font-size: .82rem;
+    color: #c4b5a1;
+    display: flex; flex-direction: column; gap: 6px;
+}
+.admin-foot .btn {
+    background: #4a423b; color: #f1e7d8; border-color: #4a423b;
+    margin-top: 4px;
+}
+.admin-foot .btn:hover { background: #5e544b; }
+
+.admin-main {
+    padding: 32px;
+}
+
+.admin-head {
+    display: flex; align-items: center; justify-content: space-between;
+    margin-bottom: 24px; gap: 16px; flex-wrap: wrap;
+}
+.admin-head h1 { font-size: 1.6rem; }
+
+.admin-quicklinks {
+    display: flex; gap: 10px; flex-wrap: wrap;
+    margin-top: 22px;
+}
+
+/* ----- KPI grid ----- */
+.kpi-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 16px;
+}
+.kpi {
+    background: #fff;
+    border: 1px solid #ece4d8;
+    border-radius: 10px;
+    padding: 20px;
+}
+.kpi-label {
+    color: #897e74; font-size: .78rem;
+    text-transform: uppercase; letter-spacing: .04em;
+    margin-bottom: 6px;
+}
+.kpi-value {
+    font-size: 1.8rem; font-weight: 700;
+    color: #2f2a26;
+    font-family: Georgia, serif;
+}
+
+/* ----- Admin tables ----- */
+.admin-main .data-table th { background: #ece4d8; }
+
+@media (max-width: 768px) {
+    .admin-shell { grid-template-columns: 1fr; }
+    .admin-sidebar {
+        position: relative; height: auto;
+        flex-direction: row; flex-wrap: wrap;
+        padding: 12px;
+    }
+    .admin-sidebar .admin-brand { margin-right: auto; margin-bottom: 0; }
+    .admin-nav { flex-direction: row; flex-wrap: wrap; width: 100%; margin-top: 12px; }
+    .admin-foot { width: 100%; margin-top: 10px; }
+    .admin-main { padding: 18px; }
+}
