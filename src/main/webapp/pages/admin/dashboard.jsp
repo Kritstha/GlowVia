@@ -20,7 +20,7 @@
         <!-- Dashboard heading -->
         <div class="admin-head">
             <h1>Dashboard</h1>
-            <p class="muted">Snapshot of the Glowvia store.</p>
+            
         </div>
 
         <!-- Show success message if any -->

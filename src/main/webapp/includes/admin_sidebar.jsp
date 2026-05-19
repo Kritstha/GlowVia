@@ -6,10 +6,11 @@
 
     <nav class="admin-nav">
         <a href="${pageContext.request.contextPath}/admin/dashboard">Dashboard</a>
-        <a href="${pageContext.request.contextPath}/admin/products">Products</a>
+        <a href="${pageContext.request.contextPath}/admin/manage-product">Products</a>
         <a href="${pageContext.request.contextPath}/admin/brands">Brands</a>
         <a href="${pageContext.request.contextPath}/admin/orders">Orders</a>
         <a href="${pageContext.request.contextPath}/admin/users">Customers</a>
+        <a href="${pageContext.request.contextPath}/admin/reviews">Reviews</a>
     </nav>
 
     <div class="admin-foot">
