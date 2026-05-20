@@ -38,7 +38,7 @@ public class AdminReviewController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        // Get the current user from the session
+
         HttpSession session = request.getSession();
         User currentUser = (User) session.getAttribute("currentUser");
 
@@ -47,7 +47,7 @@ public class AdminReviewController extends HttpServlet {
             return;
         }
 
-        // If user is not admin redirect to home page
+
         if (!"admin".equals(currentUser.getRole())) {
             response.sendRedirect(request.getContextPath() + "/home");
             return;
@@ -84,11 +84,11 @@ public class AdminReviewController extends HttpServlet {
             
             System.out.println("Reviews fetched: " + reviews.size());
 
-            // Set the reviews list and page title as request attributes
+
             request.setAttribute("reviews", reviews);
             request.setAttribute("pageTitle", "Reviews - Admin");
 
-            // Forward to the admin reviews JSP page to display the reviews
+
             request.getRequestDispatcher("/pages/admin/reviews.jsp").forward(request, response);
 
         } catch (SQLException | ClassNotFoundException e) {
@@ -116,13 +116,12 @@ public class AdminReviewController extends HttpServlet {
 
         try (Connection conn = DbConfig.getDbConnection()) {
 
-            // Delete the review from the database using the review id
+
             String sql = "DELETE FROM reviews WHERE id = ?";
             PreparedStatement stmt = conn.prepareStatement(sql);
             stmt.setInt(1, Integer.parseInt(reviewIdParam));
             int rows = stmt.executeUpdate();
 
-            // Check if review was deleted successfully and set flash message
             if (rows > 0) {
                 session.setAttribute("success", "Review deleted successfully.");
             } else {
@@ -134,7 +133,7 @@ public class AdminReviewController extends HttpServlet {
             session.setAttribute("error", "Something went wrong. Please try again.");
         }
 
-        // Redirect back to the admin reviews page after delete
+
         response.sendRedirect(request.getContextPath() + "/admin/reviews");
     }
 }

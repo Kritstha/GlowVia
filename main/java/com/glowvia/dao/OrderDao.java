@@ -38,7 +38,7 @@ public class OrderDao {
             c = DbConnection.open();
             c.setAutoCommit(false);
 
-            // 1) insert order header
+
             int orderId;
             String insOrder = "INSERT INTO orders (user_id, total_amount, status) "
                             + "VALUES (?, ?, 'Pending')";
@@ -53,7 +53,7 @@ public class OrderDao {
                 }
             }
 
-            // 2) insert each line and decrement stock
+
             String insItem = "INSERT INTO order_items "
                     + "(order_id, product_id, quantity, price_at_purchase) "
                     + "VALUES (?, ?, ?, ?)";
@@ -75,7 +75,7 @@ public class OrderDao {
                 }
             }
 
-            // 3) clear the cart
+
             cartDao.clearCart(c, cartId);
 
             c.commit();

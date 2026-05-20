@@ -11,7 +11,7 @@
         </div>
         <div>
         
-        <!-- This section just links to product categories -->
+
         
             <h4>Shop</h4>
             <a href="${pageContext.request.contextPath}/products">All Products</a><br/>
@@ -27,8 +27,7 @@
             <a href="${pageContext.request.contextPath}/contact">Contact</a>
         </div>
         
-        <!-- This section  links to user account pages
-        i also used link to map url to show map. -->
+        <!-- This section  links to user account pages, i also used link to map url to show map. -->
         <div>
             <h4>Account</h4>
             <a href="${pageContext.request.contextPath}/login">Sign In</a><br/>

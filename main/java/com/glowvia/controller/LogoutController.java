@@ -30,7 +30,7 @@ public class LogoutController extends HttpServlet {
             session.invalidate();
         }
 
-        // Redirect to login page after logout
+
         response.sendRedirect(request.getContextPath() + "/login");
     }
 }

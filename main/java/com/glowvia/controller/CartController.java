@@ -29,6 +29,8 @@ public class CartController extends HttpServlet {
         HttpSession session = request.getSession();
         User user = (User) session.getAttribute("currentUser");
 
+        //Check if user is logged in before accessing cart.If session does not contain current user,redirect user to login page.
+
         if (user == null) {
             response.sendRedirect(request.getContextPath() + "/login");
             return;
@@ -37,7 +39,9 @@ public class CartController extends HttpServlet {
         List<Map<String, Object>> cartItems = new ArrayList<>();
 
         try (Connection conn = DbConfig.getDbConnection()) {
-
+        
+        	//Fetch cart id of current logged in user.	If cart does not exist, show empty cart page.
+        	
             int cartId = getCartId(conn, user.getId());
 
             if (cartId == -1) {
@@ -48,7 +52,7 @@ public class CartController extends HttpServlet {
                 return;
             }
 
-            // Remove out of stock items from cart automatically
+
             String removeOutOfStockSql = "DELETE FROM cart_items WHERE cart_id = ? AND product_id IN (SELECT id FROM products WHERE stock_quantity <= 0)";
             PreparedStatement removeStmt = conn.prepareStatement(removeOutOfStockSql);
             removeStmt.setInt(1, cartId);
@@ -57,7 +61,7 @@ public class CartController extends HttpServlet {
             if (removedItems > 0) {
                 session.setAttribute("error", "Some items were removed because they are out of stock.");
             }
-
+//Remove product automatically from cart when stock stock quantity becomes 0
             String sql = "SELECT p.id, p.name, p.description, p.photo_path, p.price, p.stock_quantity, ci.quantity, ci.cart_item_id "
                     + "FROM cart_items ci JOIN products p ON ci.product_id = p.id WHERE ci.cart_id = ?";
             PreparedStatement stmt = conn.prepareStatement(sql);
@@ -88,7 +92,7 @@ public class CartController extends HttpServlet {
             response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Error fetching cart items");
             return;
         }
-
+//calculate amount of all product in cart
         double totalAmount = 0.0;
         for (Map<String, Object> item : cartItems) {
             totalAmount += (double) item.get("price") * (int) item.get("quantity");
@@ -115,7 +119,10 @@ public class CartController extends HttpServlet {
         String path = request.getServletPath();
 
         try (Connection conn = DbConfig.getDbConnection()) {
-
+        	/*
+        	Handle add to cart functionality.
+        	Also checks stock availability before adding item.
+        	*/
             if ("/cart/add".equals(path)) {
                 int productId = Integer.parseInt(request.getParameter("productId"));
                 int quantity = Integer.parseInt(request.getParameter("quantity"));
@@ -137,7 +144,10 @@ public class CartController extends HttpServlet {
                 }
 
                 int cartId = getOrCreateCart(conn, user.getId());
-
+                /*
+                If product already exists in cart,
+                update quantity instead of inserting duplicate item.
+                */
                 String checkSql = "SELECT cart_item_id, quantity FROM cart_items WHERE cart_id = ? AND product_id = ?";
                 PreparedStatement checkStmt = conn.prepareStatement(checkSql);
                 checkStmt.setInt(1, cartId);

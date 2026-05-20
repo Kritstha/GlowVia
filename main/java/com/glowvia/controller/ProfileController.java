@@ -36,7 +36,7 @@ public class ProfileController extends HttpServlet {
         HttpSession session = request.getSession();
         User currentUser = (User) session.getAttribute("currentUser");
 
-        // If user is not logged in redirect to login page
+
         if (currentUser == null) {
             response.sendRedirect(request.getContextPath() + "/login");
             return;
@@ -44,7 +44,7 @@ public class ProfileController extends HttpServlet {
 
         try (Connection conn = DbConfig.getDbConnection()) {
 
-            // Get latest user details from database
+            // Getting latest user details from database
             String sql = "SELECT * FROM users WHERE id = ?";
             PreparedStatement ps = conn.prepareStatement(sql);
             ps.setInt(1, currentUser.getId());
@@ -87,7 +87,7 @@ public class ProfileController extends HttpServlet {
         HttpSession session = request.getSession();
         User currentUser = (User) session.getAttribute("currentUser");
 
-        // If user is not logged in redirect to login page
+
         if (currentUser == null) {
             response.sendRedirect(request.getContextPath() + "/login");
             return;
@@ -95,20 +95,20 @@ public class ProfileController extends HttpServlet {
 
         String path = request.getServletPath();
 
-        // Handle password update request
+
         if ("/profile/password".equals(path)) {
             String currentPassword = request.getParameter("currentPassword");
             String newPassword = request.getParameter("newPassword");
             String confirmPassword = request.getParameter("confirmPassword");
 
-            // Check if new password and confirm password match
+
             if (!newPassword.equals(confirmPassword)) {
                 session.setAttribute("error", "New passwords do not match.");
                 response.sendRedirect(request.getContextPath() + "/profile");
                 return;
             }
 
-            // Check if new password is at least 6 characters
+
             if (newPassword.length() < 6) {
                 session.setAttribute("error", "New password must be at least 6 characters.");
                 response.sendRedirect(request.getContextPath() + "/profile");
@@ -117,7 +117,7 @@ public class ProfileController extends HttpServlet {
 
             try (Connection conn = DbConfig.getDbConnection()) {
 
-                // Get current hashed password from database
+
                 String getSql = "SELECT password FROM users WHERE id = ?";
                 PreparedStatement getPs = conn.prepareStatement(getSql);
                 getPs.setInt(1, currentUser.getId());
@@ -126,14 +126,14 @@ public class ProfileController extends HttpServlet {
                 if (rs.next()) {
                     String hashedPassword = rs.getString("password");
 
-                    // Check if current password entered is correct
+
                     if (!BCrypt.checkpw(currentPassword, hashedPassword)) {
                         session.setAttribute("error", "Current password is incorrect.");
                         response.sendRedirect(request.getContextPath() + "/profile");
                         return;
                     }
 
-                    // Hash the new password and update in database
+
                     String newHashedPassword = BCrypt.hashpw(newPassword, BCrypt.gensalt(10));
                     String updateSql = "UPDATE users SET password = ? WHERE id = ?";
                     PreparedStatement updatePs = conn.prepareStatement(updateSql);
@@ -158,7 +158,7 @@ public class ProfileController extends HttpServlet {
             return;
         }
 
-        // Handle profile update request
+
         String fullName = request.getParameter("fullName");
         String email = request.getParameter("email");
         String phone = request.getParameter("phone");
@@ -167,7 +167,7 @@ public class ProfileController extends HttpServlet {
 
         try (Connection conn = DbConfig.getDbConnection()) {
 
-            // Update user details in database
+
             String sql = "UPDATE users SET full_name = ?, email = ?, phone = ?, dob = ?, gender = ? WHERE id = ?";
             PreparedStatement ps = conn.prepareStatement(sql);
             ps.setString(1, fullName);

@@ -10,33 +10,21 @@
 </head>
 <body class="customer-body">
 
-<!--
-    This includes the customer navigation bar at the top of the page
-    It shows the logo, navigation links and login or logout buttons
--->
+
 <jsp:include page="/includes/customer_nav.jsp" />
 
-<!--
-    This includes the flash messages section
-    It shows success or error messages after an action
--->
+
 <jsp:include page="/includes/flash.jsp" />
 
 <section class="section">
 
-    <!--
-        This section shows the page heading on the about us page
-        It displays the title and a short tagline for the page
-    -->
+
     <div class="page-head">
         <h1>About Glowvia</h1>
         <p class="muted">Beauty that feels good - inside and out.</p>
     </div>
 
-    <!--
-        This section shows information about Glowvia
-        It includes the company story, promise and community values
-    -->
+
     <div class="prose">
         <p>
             Glowvia began as a passion project: a small team determined to prove that
@@ -59,20 +47,14 @@
         </p>
     </div>
 
-    <!--
-        This block of code shows the team section on the about us page
-        It displays all 6 team members with their photo, role and bio
-    -->
+
     <div class="team-section">
         <h2>Meet the Team</h2>
         <p class="muted">The passionate people behind Glowvia.</p>
 
         <div class="team-grid">
 
-            <!--
-                This card shows Kritagya Shrestha who is the Project Leader
-                He manages the team and ensures the project is delivered on time
-            -->
+  
             <div class="team-member-card">
                 <img src="${pageContext.request.contextPath}/images/team/kritagya.jpg"
                      alt="Kritagya Shrestha" class="member-photo"/>
@@ -83,10 +65,6 @@
                 <p class="member-detail"><strong>College:</strong> Islington College, Kathmandu</p>
             </div>
 
-            <!--
-                This card shows Ramkrishna Poudel who is the Full-Stack Developer
-                He works on both frontend and backend of the platform
-            -->
             <div class="team-member-card">
                 <img src="${pageContext.request.contextPath}/images/team/krishna.jpg"
                      alt="Ramkrishna Poudel" class="member-photo"/>
@@ -97,10 +75,7 @@
                 <p class="member-detail"><strong>College:</strong> Islington College, Kathmandu</p>
             </div>
 
-            <!--
-                This card shows Shubham Tiwari who is the Backend Developer
-                He builds the server side logic and APIs of Glowvia
-            -->
+ 
             <div class="team-member-card">
                 <img src="${pageContext.request.contextPath}/images/team/Shubham.png"
                      alt="Shubham Tiwari" class="member-photo"/>
@@ -111,10 +86,8 @@
                 <p class="member-detail"><strong>College:</strong> Islington College, Kathmandu</p>
             </div>
 
-            <!--
-  This card shows Vishal Singh who is the Frontend Developer
-                He designs and builds the user interface of Glowvia
-            -->
+
+
             <div class="team-member-card">
                 <img src="${pageContext.request.contextPath}/images/team/vishal.jpg"
                      alt="Vishal Singh" class="member-photo"/>
@@ -125,8 +98,7 @@
                 <p class="member-detail"><strong>College:</strong> Islington College, Kathmandu</p>
             </div>
 
-            <!--This card shows Nidesh Byanjankar who is the Database Administrator
-                He designs and manages the Glowvia database-->
+
             <div class="team-member-card">
                 <img src="${pageContext.request.contextPath}/images/team/nidesh.jpg"
                      alt="Nidesh Byanjankar" class="member-photo"/>
@@ -137,8 +109,7 @@
                 <p class="member-detail"><strong>College:</strong> Islington College, Kathmandu</p>
             </div>
 
-            <!--This card shows Salina Karki who is the UI/UX Designer
-                She creates beautiful and user friendly designs for Glowvia-->
+
             <div class="team-member-card">
                 <img src="${pageContext.request.contextPath}/images/team/salina.jpg"
                      alt="Salina Karki" class="member-photo"/>
@@ -153,8 +124,7 @@
     </div>
 </section>
 
-<!--This includes the customer footer at the bottom of the page
-    It shows links, contact details and the Google Maps location-->
+
 <jsp:include page="/includes/customer_footer.jsp"/>
 
 </body>

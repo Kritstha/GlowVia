@@ -16,82 +16,68 @@ import java.util.List;
 import java.util.Map;
 
 /*
-  This controller handles the product detail page
-  It is mapped to the /product URL
-  When customer clicks on a product it shows the full details
-  including description, price, reviews and add to cart form
- */
+This controller handles product detail page requests.
+It displays full product information along with reviews.
+*/
 @WebServlet("/product")
 public class ProductDetailController extends HttpServlet {
 
     private static final long serialVersionUID = 1L;
 
-    /*
-      This method runs when the customer clicks on a product to view its details
-      It gets the product from the database along with its reviews
-      and checks if the current user has already reviewed this product
-     */
+
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        // Get the product id from the URL parameter
+        
         String productIdParam = request.getParameter("id");
 
-        // If no product id provided redirect to products page
+        /*
+        Validate product id before processing request.
+        Redirect user if product id is missing.
+        */        
         if (productIdParam == null || productIdParam.isEmpty()) {
             response.sendRedirect(request.getContextPath() + "/products");
             return;
         }
 
         try {
-            // Convert the product id from string to integer
+            
             int productId = Integer.parseInt(productIdParam);
-
-            // Create product service to get the product from the database
-            ProductService productService = new ProductService();
-
-            // Get the product by its id from the database
+            ProductService productService = new ProductService();           
             Product selectedProduct = productService.getProductById(productId);
 
-            // If product found show the product detail page
+            
             if (selectedProduct != null) {
 
-                /*
-                  Get all reviews for this product from the database
-                  Reviews are shown at the bottom of the product detail page
-                 */
                 ReviewService reviewService = new ReviewService();
                 List<Map<String, Object>> reviews = reviewService.getReviewsByProductId(productId);
 
-                // Get the current user from the session
+                
                 HttpSession session = request.getSession();
                 User currentUser = (User) session.getAttribute("currentUser");
 
-                /*
-                  Check if the current user has already reviewed this product
-                  If yes the review form will be hidden so they cannot review twice
-                 */
+              
                 boolean hasReviewed = false;
                 if (currentUser != null) {
                     hasReviewed = reviewService.hasUserReviewed(productId, currentUser.getId());
                 }
 
-                // Set the product, reviews and hasReviewed as request attributes
+//send product details and review data to jsp page for display                
                 request.setAttribute("product", selectedProduct);
                 request.setAttribute("reviews", reviews);
                 request.setAttribute("hasReviewed", hasReviewed);
                 request.setAttribute("pageTitle", selectedProduct.getName() + " - Glowvia");
 
-                // Forward to the product detail JSP page to display everything
+                
                 request.getRequestDispatcher("/pages/customer/product_detail.jsp").forward(request, response);
 
             } else {
-                // If product not found redirect to the products page
+//Redirect user if product is not found in database                
                 response.sendRedirect(request.getContextPath() + "/products");
             }
-
+//Handle invalid product id format and prevent application crash.
         } catch (NumberFormatException e) {
-            // If product id is not a valid number redirect to the products page
+            
             e.printStackTrace();
             response.sendRedirect(request.getContextPath() + "/products");
         }

@@ -17,19 +17,19 @@
     <main class="admin-main">
         <jsp:include page="/includes/flash.jsp" />
 
-        <!-- Page heading -->
+ 
         <div class="admin-head">
             <h1>Reviews</h1>
             <p class="muted">Manage customer product reviews.</p>
         </div>
 
-        <!-- Show success message if any -->
+
         <c:if test="${not empty sessionScope.success}">
             <div class="toast toast-success">${sessionScope.success}</div>
             <c:remove var="success" scope="session"/>
         </c:if>
 
-        <!-- Show error message if any -->
+
         <c:if test="${not empty sessionScope.error}">
             <div class="toast toast-error">${sessionScope.error}</div>
             <c:remove var="error" scope="session"/>
@@ -52,24 +52,24 @@
                     <!-- Loop through all reviews and display them -->
                     <c:forEach var="review" items="${reviews}">
                         <tr>
-                            <!-- Product name -->
+
                             <td>${review.get('productName')}</td>
 
-                            <!-- Customer name -->
+
                             <td>${review.get('fullName')}</td>
 
-                            <!-- Rating stars -->
+
                             <td>
                                 <c:forEach begin="1" end="${review.get('rating')}" var="star">⭐</c:forEach>
                             </td>
 
-                            <!-- Review comment -->
+
                             <td>${review.get('comment')}</td>
 
-                            <!-- Review date -->
+
                             <td>${review.get('createdAt')}</td>
 
-                            <!-- Delete button -->
+
                             <td class="action-cell">
                                 <form method="post"
                                       action="${pageContext.request.contextPath}/admin/review/delete"

@@ -13,7 +13,7 @@
     <c:remove var="success" scope="session"/>
 </c:if>
 
-<!-- This shows the error flash message in a red toast -->
+<!-- Error flash message in a red toast -->
 <c:if test="${not empty sessionScope.error}">
     <div class="toast toast-error">${sessionScope.error}</div>
     <c:remove var="error" scope="session"/>

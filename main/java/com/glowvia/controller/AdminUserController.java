@@ -36,7 +36,7 @@ public class AdminUserController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        // Get the current user from the session
+
         HttpSession session = request.getSession();
         User currentUser = (User) session.getAttribute("currentUser");
 
@@ -45,7 +45,7 @@ public class AdminUserController extends HttpServlet {
             return;
         }
 
-        // If user is not admin redirect to home page
+
         if (!"admin".equals(currentUser.getRole())) {
             response.sendRedirect(request.getContextPath() + "/home");
             return;

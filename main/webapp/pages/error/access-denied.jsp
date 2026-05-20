@@ -28,22 +28,16 @@
     -->
     <h1 style="font-size: 5rem; color: var(--bad);">403</h1>
 
-    <!-- This shows the access denied heading -->
+
     <h2>Access Denied</h2>
 
-    <!--
-        This shows a message explaining why the customer cannot view this page
-        Only admin users are allowed to access the admin panel
-    -->
+ 
     <p class="muted" style="margin: 16px 0;">
         Oops! You don't have permission to view this page.
         This page is only accessible to admins.
     </p>
 
-    <!--
-        This shows a button to take the customer back to the home page
-        Clicking it redirects the customer to the Glowvia home page
-    -->
+ 
     <a href="${pageContext.request.contextPath}/home" class="btn btn-primary">
         Go to Homepage
     </a>

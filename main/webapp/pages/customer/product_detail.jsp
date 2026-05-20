@@ -10,37 +10,23 @@
 </head>
 <body class="customer-body">
 
-<!--
-    This includes the customer navigation bar at the top of the page
-    It shows the logo, navigation links and login or logout buttons
--->
+
 <jsp:include page="/includes/customer_nav.jsp" />
 
-<!--
-    This includes the flash messages section
-    It shows success or error messages after an action
--->
+
 <jsp:include page="/includes/flash.jsp" />
 
 <section class="section">
 
-    <!--
-        This is the back link that takes the customer back to the products page
-    -->
+
     <a class="back-link" href="${pageContext.request.contextPath}/products">
         &larr; Back to shop
     </a>
 
-    <!--
-        This is the product detail grid section
-        It shows the product image on the left and product info on the right
-    -->
+ 
     <div class="detail-grid">
 
-        <!--
-            This shows the product image
-            If no image is found it shows a placeholder image
-        -->
+
         <div class="detail-image">
             <img src="${pageContext.request.contextPath}/${product.photoPath}"
                  alt="${product.name}"
@@ -49,10 +35,7 @@
 
         <div class="detail-info">
 
-            <!--
-                This shows the product brand name
-                If no brand is found it shows Glowvia as the default brand
-            -->
+
             <div class="muted detail-brand">
                 <c:choose>
                     <c:when test="${empty product.brandName}">Glowvia</c:when>
@@ -60,16 +43,13 @@
                 </c:choose>
             </div>
 
-            <!-- This shows the name of the product -->
+
             <h1>${product.name}</h1>
 
-            <!-- This shows the price of the product in NPR -->
+
             <div class="detail-price">NPR ${product.price}</div>
 
-            <!--
-                This shows the product badges for category, skin type and stock status
-                Stock badge is green for in stock and red for out of stock
-            -->
+         
             <div class="badge-row">
                 <span class="badge">${product.category}</span>
                 <span class="badge">${product.skinType}</span>
@@ -83,13 +63,10 @@
                 </c:choose>
             </div>
 
-            <!-- This shows the full description of the product -->
+
             <p class="detail-desc">${product.description}</p>
 
-            <!--
-                This shows the key ingredients of the product
-                If no ingredients are listed it shows a dash
-            -->
+
             <div class="detail-fact">
                 <strong>Key ingredients:</strong>
                 <span>
@@ -133,10 +110,7 @@
         </div>
     </div>
 
-    <!--
-        This is the reviews section at the bottom of the product detail page
-        It shows all customer reviews and allows logged in users to add a review
-    -->
+ 
     <div class="reviews-section" style="margin-top: 40px;">
         <h2>Customer Reviews</h2>
 
@@ -158,20 +132,14 @@
             <c:remove var="error" scope="session"/>
         </c:if>
 
-        <!--
-            This shows the write a review form
-            It is only shown when the user is logged in and has not reviewed this product yet
-        -->
+
         <c:if test="${not empty sessionScope.currentUser && !hasReviewed}">
             <div class="card" style="margin-bottom: 20px;">
                 <h3>Write a Review</h3>
                 <form method="post" action="${pageContext.request.contextPath}/review/add">
                     <input type="hidden" name="productId" value="${product.id}"/>
 
-                    <!--
-                        This is the rating dropdown
-                        Customer selects a rating from 1 to 5 stars
-                    -->
+
                     <div class="form-row">
                         <label for="rating">Rating</label>
                         <select id="rating" name="rating" required>
@@ -183,10 +151,7 @@
                         </select>
                     </div>
 
-                    <!--
-                        This is the comment textarea
-                        Customer types their review comment here
-                    -->
+         
                     <div class="form-row">
                         <label for="comment">Comment</label>
                         <textarea id="comment" name="comment" rows="3"
@@ -234,10 +199,7 @@
             </div>
         </c:forEach>
 
-        <!--
-            This shows a message if there are no reviews yet for this product
-            It encourages the customer to be the first to leave a review
-        -->
+   
         <c:if test="${empty reviews}">
             <div class="empty-msg">
                 No reviews yet. Be the first to review this product!
@@ -246,10 +208,7 @@
     </div>
 </section>
 
-<!--
-    This includes the customer footer at the bottom of the page
-    It shows links, contact details and the Google Maps location
--->
+
 <jsp:include page="/includes/customer_footer.jsp"/>
 
 </body>

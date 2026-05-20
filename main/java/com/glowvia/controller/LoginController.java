@@ -34,7 +34,7 @@ public class LoginController extends HttpServlet {
         String identifier = request.getParameter("identifier");
         String password = request.getParameter("password");
 
-        // Check if username and password fields are empty
+
         if (identifier == null || identifier.trim().isEmpty() ||
             password == null || password.trim().isEmpty()) {
             request.setAttribute("error", "Please enter username and password.");
@@ -44,7 +44,7 @@ public class LoginController extends HttpServlet {
 
         try (Connection conn = DbConfig.getDbConnection()) {
 
-            // Search for user by username or email in the database
+
             String sql = "SELECT * FROM users WHERE username = ? OR email = ?";
             PreparedStatement ps = conn.prepareStatement(sql);
             ps.setString(1, identifier.trim());
@@ -71,7 +71,7 @@ public class LoginController extends HttpServlet {
                     HttpSession session = request.getSession();
                     session.setAttribute("currentUser", user);
 
-                    // Admin goes to dashboard, regular user goes to home page
+
                     if ("admin".equals(user.getRole())) {
                         response.sendRedirect(request.getContextPath() + "/admin/dashboard");
                     } else {

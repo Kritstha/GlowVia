@@ -25,10 +25,8 @@ public class AboutController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        // Set the page title that will be shown in the browser tab
-        request.setAttribute("pageTitle", "About Us - Glowvia");
-
-        // Forward the request to the about JSP page to display it
+        
+        request.setAttribute("pageTitle", "About Us - Glowvia");     
         request.getRequestDispatcher("/pages/customer/about.jsp").forward(request, response);
     }
 }

@@ -10,31 +10,20 @@
 </head>
 <body class="customer-body">
 
-<!--
-    This includes the customer navigation bar at the top of the page
-    It shows the logo, navigation links and login or logout buttons
--->
+
 <jsp:include page="/includes/customer_nav.jsp" />
 
-<!--
-    This includes the flash messages section
-    It shows success or error messages after an action
--->
+
 <jsp:include page="/includes/flash.jsp" />
 
 <section class="section">
 
-    <!--
-        This is the back link that takes the customer back to all orders page
-    -->
+
     <a class="back-link" href="${pageContext.request.contextPath}/orders">
         &larr; All orders
     </a>
 
-    <!--
-        This is the order heading section
-        It shows the order number, date it was placed and current status
-    -->
+ 
     <div class="page-head">
         <h1>Order #${order.orderId}</h1>
         <p class="muted">
@@ -73,23 +62,21 @@
                 <c:forEach var="item" items="${orderItems}">
                     <tr>
 
-                        <!-- This shows the name of the product that was ordered -->
+    
                         <td>${item.get('productName')}</td>
 
-                        <!-- This shows how many units of the product were ordered -->
+                   
                         <td>${item.get('quantity')}</td>
 
-                        <!-- This shows the price per unit at the time of purchase -->
+              
                         <td>NPR ${item.get('priceAtPurchase')}</td>
 
-                        <!-- This shows the total price for this item -->
+              
                         <td>NPR ${item.get('lineTotal')}</td>
                     </tr>
                 </c:forEach>
 
-                <!--
-                    This shows a message if there are no items found for this order
-                -->
+         
                 <c:if test="${empty orderItems}">
                     <tr>
                         <td colspan="4" class="empty-cell">
@@ -113,10 +100,7 @@
     </div>
 </section>
 
-<!--
-    This includes the customer footer at the bottom of the page
-    It shows links, contact details and the Google Maps location
--->
+
 <jsp:include page="/includes/customer_footer.jsp"/>
 
 </body>

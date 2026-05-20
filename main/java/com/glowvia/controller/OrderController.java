@@ -122,7 +122,7 @@ public class OrderController extends HttpServlet {
             return;
         }
 
-        // Default: show all orders for the current user
+
         List<Order> orders = orderService.getOrdersByUserId(currentUser.getId());
         request.setAttribute("orders", orders);
         request.setAttribute("pageTitle", "My Orders - Glowvia");

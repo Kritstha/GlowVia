@@ -37,17 +37,17 @@ public class AdminBrandController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        // Get the current user from the session
+
         HttpSession session = request.getSession();
         User currentUser = (User) session.getAttribute("currentUser");
 
-        // If user is not logged in redirect to login page
+
         if (currentUser == null) {
             response.sendRedirect(request.getContextPath() + "/login");
             return;
         }
 
-        // If user is not admin redirect to home page
+
         if (!"admin".equals(currentUser.getRole())) {
             response.sendRedirect(request.getContextPath() + "/home");
             return;
@@ -55,12 +55,12 @@ public class AdminBrandController extends HttpServlet {
 
         try (Connection conn = DbConfig.getDbConnection()) {
 
-            // Get all brands from the database ordered by newest first
+
             String sql = "SELECT * FROM brands ORDER BY id DESC";
             PreparedStatement stmt = conn.prepareStatement(sql);
             ResultSet rs = stmt.executeQuery();
 
-            // Loop through all brands and add them to the list
+
             List<Map<String, Object>> brands = new ArrayList<>();
             while (rs.next()) {
                 Map<String, Object> brand = new HashMap<>();
@@ -70,14 +70,14 @@ public class AdminBrandController extends HttpServlet {
                 brands.add(brand);
             }
 
-            // Print the number of brands fetched for debugging
+
             System.out.println("Brands fetched in controller: " + brands.size());
 
-            // Set the brands list and page title as request attributes
+
             request.setAttribute("brands", brands);
             request.setAttribute("pageTitle", "Manage Brands - Glowvia");
 
-            // Forward to the brands JSP page to display the brands
+
             request.getRequestDispatcher("/pages/admin/brands.jsp").forward(request, response);
 
         } catch (SQLException | ClassNotFoundException e) {
@@ -93,18 +93,13 @@ public class AdminBrandController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
-        // Get the current user from the session
         HttpSession session = request.getSession();
         User currentUser = (User) session.getAttribute("currentUser");
-
-        // If user is not logged in redirect to login page
         if (currentUser == null) {
             response.sendRedirect(request.getContextPath() + "/login");
             return;
         }
 
-        // Get the requested path to decide what action to perform
         String path = request.getServletPath();
 
         /*
@@ -115,7 +110,7 @@ public class AdminBrandController extends HttpServlet {
             String name = request.getParameter("name");
             String contact = request.getParameter("contact");
 
-            // Check if brand name is empty and show error if it is
+
             if (name == null || name.trim().isEmpty()) {
                 session.setAttribute("error", "Brand name is required.");
                 response.sendRedirect(request.getContextPath() + "/admin/brands");
@@ -154,14 +149,14 @@ public class AdminBrandController extends HttpServlet {
 
             try (Connection conn = DbConfig.getDbConnection()) {
 
-                // Delete the brand from the database using the brand id
+                
                 String sql = "DELETE FROM brands WHERE id = ?";
                 PreparedStatement stmt = conn.prepareStatement(sql);
                 stmt.setInt(1, Integer.parseInt(brandIdParam));
 
                 int rows = stmt.executeUpdate();
 
-                // Check if brand was deleted successfully and set message
+                
                 if (rows > 0) {
                     session.setAttribute("success", "Brand deleted successfully.");
                 } else {
@@ -174,7 +169,7 @@ public class AdminBrandController extends HttpServlet {
             }
         }
 
-        // Redirect back to the brands page after add or delete
+        
         response.sendRedirect(request.getContextPath() + "/admin/brands");
     }
 }

@@ -35,7 +35,7 @@ public class UserDao {
         return u;
     }
 
-    /** Look up by username or email - used at login. */
+
     public User findByLogin(String identifier) {
         String sql = "SELECT " + COLS + " FROM users "
                    + "WHERE username = ? OR email = ? LIMIT 1";
@@ -108,7 +108,7 @@ public class UserDao {
         }
     }
 
-    /** Create a new account and return the generated id, or -1 on failure. */
+
     public int create(User u) {
         String sql = "INSERT INTO users "
                 + "(full_name, username, dob, gender, phone, email, password, "
@@ -171,7 +171,7 @@ public class UserDao {
         }
     }
 
-    /** All customers (excluding admins) - used in the admin user list. */
+
     public List<User> listCustomers() {
         String sql = "SELECT " + COLS + " FROM users "
                    + "WHERE user_role = 'user' ORDER BY id DESC";

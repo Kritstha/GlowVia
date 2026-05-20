@@ -17,18 +17,18 @@ import java.util.Set;
 @WebFilter(urlPatterns = {"/*"})
 public class AuthenticationFilter implements Filter {
 
-    // These paths are accessible without logging in
+
     private static final Set<String> PUBLIC_PATHS = Set.of(
             "/", "/home", "/login", "/register", "/logout",
             "/products", "/product", "/about", "/contact"
     );
 
-    // These path prefixes are accessible without logging in
+ 
     private static final Set<String> PUBLIC_PREFIXES = Set.of(
             "/css/", "/images/", "/uploads/", "/pages/error/", "/favicon"
     );
 
-    // This method runs on every request to check access
+
     @Override
     public void doFilter(ServletRequest req, ServletResponse res, FilterChain chain)
             throws IOException, ServletException {
@@ -36,30 +36,29 @@ public class AuthenticationFilter implements Filter {
         HttpServletRequest request = (HttpServletRequest) req;
         HttpServletResponse response = (HttpServletResponse) res;
 
-        // Get the context path and requested path
         String ctx = request.getContextPath();
         String path = request.getRequestURI().substring(ctx.length());
 
-        // If path is public let the request through
+
         if (isPublic(path)) {
             chain.doFilter(req, res);
             return;
         }
 
-        // If user is not logged in redirect to login page
+
         if (!SessionHelper.isLoggedIn(request)) {
             SessionHelper.flashError(request, "Please sign in to continue.");
             response.sendRedirect(ctx + "/login");
             return;
         }
 
-        // If path is admin and user is not admin redirect to access denied page
+
         if (path.startsWith("/admin") && !SessionHelper.isAdmin(request)) {
             response.sendRedirect(ctx + "/pages/error/access-denied.jsp");
             return;
         }
 
-        // Otherwise let the request through
+
         chain.doFilter(req, res);
     }
 

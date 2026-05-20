@@ -9,37 +9,21 @@
 </head>
 <body class="customer-body auth-body">
 
-<!--
-    This includes the customer navigation bar at the top of the page
-    It shows the logo, navigation links and login or logout buttons
--->
+
 <jsp:include page="/includes/customer_nav.jsp" />
 
-<!--
-    This includes the flash messages section
-    It shows success or error messages after an action
--->
+
 <jsp:include page="/includes/flash.jsp" />
 
-<!--
-    This is the main login section of the page
-    It shows the login form in the center of the page
--->
+
 <main class="auth-shell">
     <div class="auth-card">
 
-        <!--
-            This is the login page heading
-            It welcomes the user back and shows a short description
-        -->
+
         <h1>Welcome back</h1>
         <p class="muted">Sign in to continue your skincare journey.</p>
 
-        <!--
-            This is the login form
-            User enters their username or email and password to sign in
-            The form submits to the login controller via POST method
-        -->
+
         <form method="post" action="${pageContext.request.contextPath}/login" class="form">
 
             <!--
@@ -60,10 +44,7 @@
                 <input id="password" name="password" type="password" required minlength="6"/>
             </div>
 
-            <!--
-                This is the sign in button
-                Clicking this submits the form and logs the user in
-            -->
+   
             <button type="submit" class="btn btn-primary btn-block">Sign In</button>
         </form>
 
@@ -78,10 +59,6 @@
     </div>
 </main>
 
-<!--
-    This includes the customer footer at the bottom of the page
-    It shows links, contact details and the Google Maps location
--->
 <jsp:include page="/includes/customer_footer.jsp"/>
 
 </body>

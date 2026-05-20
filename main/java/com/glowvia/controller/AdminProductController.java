@@ -23,25 +23,19 @@ import java.util.List;
 
 /*
   This controller handles all admin product management operations
-  It is mapped to manage-product, add-product, edit-product and delete-product URLs
   Admin can view all products, add new products, edit existing products and delete products
  */
 @WebServlet({"/admin/manage-product", "/admin/products", "/admin/add-product", "/admin/edit-product", "/admin/delete-product"})
 @MultipartConfig(
-    fileSizeThreshold = 1024 * 1024 * 2,   // 2MB
-    maxFileSize = 1024 * 1024 * 10,         // 10MB
-    maxRequestSize = 1024 * 1024 * 50       // 50MB
+    fileSizeThreshold = 1024 * 1024 * 2,   
+    maxFileSize = 1024 * 1024 * 10,         
+    maxRequestSize = 1024 * 1024 * 50       
 )
 public class AdminProductController extends HttpServlet {
 
     private static final long serialVersionUID = 1L;
 
-    /*
-      This method runs when admin visits the manage products page
-      It handles three different GET requests based on the path
-      add-product shows the add form, edit-product shows the edit form
-      and the default path shows all products
-     */
+  
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -221,7 +215,7 @@ public class AdminProductController extends HttpServlet {
           It gets all form fields and either inserts a new product or updates existing one
          */
         try {
-            // Get all the form fields from the request
+
             String productIdParam = request.getParameter("id");
             String name = request.getParameter("name");
             String category = request.getParameter("category");
@@ -231,7 +225,7 @@ public class AdminProductController extends HttpServlet {
             int stockQuantity = Integer.parseInt(request.getParameter("stock_quantity"));
             String description = request.getParameter("description");
 
-            // Handle the product image upload and get the image path
+
             String imagePath = handleImageUpload(request, name);
 
             try (Connection conn = DbConfig.getDbConnection()) {

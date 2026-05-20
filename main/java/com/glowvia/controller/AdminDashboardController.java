@@ -57,7 +57,7 @@ public class AdminDashboardController extends HttpServlet {
             return;
         }
 
-        // Get all users from the database and set total count as attribute
+       
         List<User> users = dashboardService.getAllUsers();
         request.setAttribute("users", users);
         request.setAttribute("totalUsers", users.size());

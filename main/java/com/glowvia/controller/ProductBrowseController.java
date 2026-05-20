@@ -11,10 +11,9 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
 
-/*
- This controller handles the products browse page
- Customers can view all products or search by name, brand or ingredients
-*/
+
+// This controller handles the products browse page Customers can view all products or search by name, brand or ingredients
+
 @WebServlet(asyncSupported = true, urlPatterns = { "/products" })
 public class ProductBrowseController extends HttpServlet {
 

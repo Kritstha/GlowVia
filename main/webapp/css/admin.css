@@ -1,6 +1,6 @@
-/* =====================================================
+/*
    Glowvia - admin stylesheet (overrides + sidebar layout)
-   ===================================================== */
+ */
 
 .admin-body { background: #f4ece0; }
 
@@ -68,7 +68,7 @@
     margin-top: 22px;
 }
 
-/* ----- KPI grid ----- */
+/* KPI grid  */
 .kpi-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
@@ -91,7 +91,7 @@
     font-family: Georgia, serif;
 }
 
-/* ----- Admin tables ----- */
+/* Admin tables */
 .admin-main .data-table th { background: #ece4d8; }
 
 @media (max-width: 768px) {

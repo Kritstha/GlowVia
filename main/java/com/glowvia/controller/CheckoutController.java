@@ -131,7 +131,7 @@ public class CheckoutController extends HttpServlet {
                     updateStmt.setInt(2, orderId);
                     updateStmt.executeUpdate();
 
-                    // Clear cart from database after order is placed
+
                     String clearCartSql = "DELETE FROM cart_items WHERE cart_id = (SELECT cart_id FROM carts WHERE user_id = ?)";
                     PreparedStatement clearStmt = conn.prepareStatement(clearCartSql);
                     clearStmt.setInt(1, user.getId());
@@ -139,7 +139,7 @@ public class CheckoutController extends HttpServlet {
                 }
             }
 
-            // Clear cart from session and redirect to orders page
+
             session.removeAttribute("cartItems");
             session.setAttribute("cartCount", 0);
             session.setAttribute("success", "Order placed successfully!");

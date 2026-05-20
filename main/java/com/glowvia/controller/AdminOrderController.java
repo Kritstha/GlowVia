@@ -41,33 +41,25 @@ public class AdminOrderController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        // Get the current user from the session
+      
         HttpSession session = request.getSession();
         User currentUser = (User) session.getAttribute("currentUser");
 
-        // If user is not logged in redirect to login page
+      
         if (currentUser == null) {
             response.sendRedirect(request.getContextPath() + "/login");
             return;
         }
 
-        // If user is not admin redirect to home page
         if (!"admin".equals(currentUser.getRole())) {
             response.sendRedirect(request.getContextPath() + "/home");
             return;
         }
 
-        // Get all orders from the database using the order service
         List<Order> orders = orderService.getAllOrders();
-
-        // Print the number of orders fetched for debugging
         System.out.println("Orders fetched in controller: " + orders.size());
-
-        // Set the orders list and page title as request attributes
         request.setAttribute("orders", orders);
         request.setAttribute("pageTitle", "Manage Orders - Glowvia");
-
-        // Forward to the admin orders JSP page to display the orders
         request.getRequestDispatcher("/pages/admin/orders.jsp").forward(request, response);
     }
 
@@ -79,11 +71,10 @@ public class AdminOrderController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        // Get the order id and new status from the form
+
         String orderIdParam = request.getParameter("orderId");
         String status = request.getParameter("status");
-
-        // Check if order id is valid and show error if it is not
+        
         if (orderIdParam == null || orderIdParam.isEmpty()) {
             request.getSession().setAttribute("error", "Invalid order id.");
             response.sendRedirect(request.getContextPath() + "/admin/orders");
@@ -92,7 +83,7 @@ public class AdminOrderController extends HttpServlet {
 
         try (Connection conn = DbConfig.getDbConnection()) {
 
-            // Update the order status in the database using the order id
+ 
             String sql = "UPDATE orders SET status = ? WHERE order_id = ?";
             PreparedStatement stmt = conn.prepareStatement(sql);
             stmt.setString(1, status);
@@ -100,7 +91,7 @@ public class AdminOrderController extends HttpServlet {
 
             int rows = stmt.executeUpdate();
 
-            // Check if update was successful and set the flash message
+
             if (rows > 0) {
                 request.getSession().setAttribute("success", "Order status updated successfully.");
             } else {
@@ -112,7 +103,7 @@ public class AdminOrderController extends HttpServlet {
             request.getSession().setAttribute("error", "Something went wrong. Please try again.");
         }
 
-        // Redirect back to the admin orders page after update
+
         response.sendRedirect(request.getContextPath() + "/admin/orders");
     }
 }
