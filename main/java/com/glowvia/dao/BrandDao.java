@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Data access layer for `brands` table.
+ * Data access layer for the `brands` table.
  */
 public class BrandDao {
 

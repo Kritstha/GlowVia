@@ -9,7 +9,7 @@ public class Product {
     private int id;
     private String name;
     private int brandId;
-    private String brandName;        // derived from JOIN on brands.name
+    private String brandName;        
     private String category;
     private String skinType;
     private String keyIngredients;

@@ -71,55 +71,55 @@ public class RegisterController extends HttpServlet {
             String password = request.getParameter("password");
             String confirmPassword = request.getParameter("confirmPassword");
 
-            // Check if full name contains only letters and is valid
+
             if (!ValidationUtil.isValidFullName(fullName)) {
                 setErrorAndRedirect(request, response, "Full name must contain letters only.");
                 return;
             }
 
-            // Check if username is valid and meets the requirements
+
             if (!ValidationUtil.isValidUsername(username)) {
                 setErrorAndRedirect(request, response, "Username must be more than 4 characters, not start with a number, contain no spaces.");
                 return;
             }
 
-            // Check if username is already taken by another user
+
             if (registerService.isUsernameTaken(username)) {
                 setErrorAndRedirect(request, response, "Username is already taken.");
                 return;
             }
 
-            // Check if password meets the minimum length requirement
+
             if (!ValidationUtil.isValidPassword(password)) {
                 setErrorAndRedirect(request, response, "Password must be more than 4 characters.");
                 return;
             }
 
-            // Check if password and confirm password match
+
             if (!password.equals(confirmPassword)) {
                 setErrorAndRedirect(request, response, "Passwords do not match.");
                 return;
             }
 
-            // Check if email address format is valid
+
             if (!ValidationUtil.isValidEmail(email)) {
                 setErrorAndRedirect(request, response, "Invalid email format.");
                 return;
             }
 
-            // Check if email is already registered by another user
+
             if (registerService.isEmailTaken(email)) {
                 setErrorAndRedirect(request, response, "Email is already registered.");
                 return;
             }
 
-            // Check if phone number is exactly 10 digits
+  
             if (!ValidationUtil.isValidPhone(phone)) {
                 setErrorAndRedirect(request, response, "Phone must be exactly 10 digits and contain only numbers.");
                 return;
             }
 
-            // Check if phone number is already registered by another user
+
             if (registerService.isPhoneTaken(phone)) {
                 setErrorAndRedirect(request, response, "Phone number is already registered.");
                 return;

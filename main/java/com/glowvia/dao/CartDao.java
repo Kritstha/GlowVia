@@ -29,7 +29,7 @@ public class CartDao {
             ex.printStackTrace();
             return -1;
         }
-        // create
+
         String ins = "INSERT INTO carts (user_id) VALUES (?)";
         try (Connection c = DbConnection.open();
              PreparedStatement ps = c.prepareStatement(ins, Statement.RETURN_GENERATED_KEYS)) {

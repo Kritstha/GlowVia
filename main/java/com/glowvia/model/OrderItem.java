@@ -13,7 +13,7 @@ public class OrderItem {
     private int quantity;
     private BigDecimal priceAtPurchase;
 
-    // Joined product fields (for display)
+
     private String productName;
     private String photoPath;
 

@@ -22,7 +22,7 @@ import java.util.Map;
 /*
   This controller handles the admin brands page
  It is mapped to /admin/brands, /admin/brand/add and /admin/brand/delete
-  Admin can view all the brands, add a new brand and delete an existing brand
+  Admin can view all brands, add a new brand and delete an existing brand
  */
 @WebServlet({"/admin/brands", "/admin/brand/add", "/admin/brand/delete"})
 public class AdminBrandController extends HttpServlet {
