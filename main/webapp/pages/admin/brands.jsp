@@ -1,0 +1,140 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>${pageTitle}</title>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/main.css"/>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/admin.css"/>
+</head>
+<body class="admin-body">
+
+<div class="admin-shell">
+
+<!--This includes the flash messages section
+            It shows success or error messages after an action-->
+    <jsp:include page="/includes/admin_sidebar.jsp" />
+
+    <main class="admin-main">
+        <jsp:include page="/includes/flash.jsp" />
+
+       <!--This is the page heading section
+            It shows the title and description of the brands page-->
+        <div class="admin-head">
+            <h1>Brands</h1>
+            <p class="muted">Add, view and remove product brands.</p>
+        </div>
+
+       <!--This checks if there is a success message in the session
+          If yes it shows a green toast message and removes it from session-->
+        <c:if test="${not empty sessionScope.success}">
+            <div class="toast toast-success">${sessionScope.success}</div>
+            <c:remove var="success" scope="session"/>
+        </c:if>
+
+       <!-- This checks if there is an error message in the session
+            If yes it shows a red toast message and removes it from session-->
+        <c:if test="${not empty sessionScope.error}">
+            <div class="toast toast-error">${sessionScope.error}</div>
+            <c:remove var="error" scope="session"/>
+        </c:if>
+
+        <div class="two-col">
+
+            <!--This is the add new brand form
+                Admin can enter a brand name and contact info to add a new brand-->
+                
+            <div class="card">
+                <h2>Add a new brand</h2>
+                <form method="post"
+                      action="${pageContext.request.contextPath}/admin/brand/add"
+                      class="form">
+
+                    <!--This is the brand name input field
+                        Admin must enter a name to add the brand-->
+                    <div class="form-row">
+                        <label for="brandName">Brand name</label>
+                        <input id="brandName" name="name" type="text"
+                               required maxlength="255"/>
+                    </div>
+
+                    <!--  This is the brand contact input field
+                        Admin can enter contact information for the brand -->
+                        
+                        
+                    <div class="form-row">
+                        <label for="brandContact">Contact info</label>
+                        <input id="brandContact" name="contact" type="text"
+                               maxlength="500"/>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">Add brand</button>
+                </form>
+            </div>
+
+            <!-- This is the existing brands table
+                It shows all brands that are currently in the database -->
+            <div class="card">
+                <h2>Existing brands</h2>
+                <div class="table-wrap">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Name</th>
+                                <th>Contact</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        
+                            <!-- This loops through all brands from the database
+                                and displays each brand in a table row -->
+                            <c:forEach var="brand" items="${brands}">
+                                <tr>
+                                    <!-- This shows the brand id -->
+                                    <td>${brand.get('id')}</td>
+
+                                    <!-- This shows the brand name -->
+                                    <td>${brand.get('name')}</td>
+
+                                    <!-- This shows the brand contact info -->
+                                    <td>${brand.get('contact')}</td>
+
+                                    <!-- This is the delete button for the brand
+                                        Admin clicks this to remove a brand from the database -->
+                                    <td>
+                                        <form class="inline-form" method="post"
+                                              action="${pageContext.request.contextPath}/admin/brand/delete"
+                                              onsubmit="return confirm('Delete this brand?');">
+                                            <input type="hidden" name="id"
+                                                   value="${brand.get('id')}"/>
+                                            <button class="btn btn-small btn-danger"
+                                                    type="submit">
+                                                Delete
+                                            </button>
+                                        </form>
+                                    </td>
+                                </tr>
+                            </c:forEach>
+
+                            <!-- This shows a message if there are no brands in the database yet -->
+                            <c:if test="${empty brands}">
+                                <tr>
+                                    <td colspan="4" class="empty-cell">
+                                        No brands yet.
+                                    </td>
+                                </tr>
+                            </c:if>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </main>
+</div>
+
+</body>
+</html>

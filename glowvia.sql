@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 19, 2026 at 02:30 PM
+-- Generation Time: May 20, 2026 at 07:31 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -84,7 +84,8 @@ CREATE TABLE `carts` (
 
 INSERT INTO `carts` (`cart_id`, `user_id`, `created_at`) VALUES
 (1, 2, '2026-05-17 14:30:54'),
-(2, 6, '2026-05-18 14:47:22');
+(2, 6, '2026-05-18 14:47:22'),
+(3, 5, '2026-05-19 15:34:16');
 
 -- --------------------------------------------------------
 
@@ -98,6 +99,13 @@ CREATE TABLE `cart_items` (
   `product_id` int(11) NOT NULL,
   `quantity` int(11) NOT NULL DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `cart_items`
+--
+
+INSERT INTO `cart_items` (`cart_item_id`, `cart_id`, `product_id`, `quantity`) VALUES
+(20, 3, 22, 100);
 
 -- --------------------------------------------------------
 
@@ -119,9 +127,17 @@ CREATE TABLE `orders` (
 --
 
 INSERT INTO `orders` (`order_id`, `user_id`, `address_id`, `order_date`, `total_amount`, `status`) VALUES
-(1, 2, NULL, '2026-05-17 14:31:09', 3100.00, 'Pending'),
+(1, 2, NULL, '2026-05-17 14:31:09', 3100.00, 'Cancelled'),
 (2, 6, NULL, '2026-05-17 18:15:00', 1395.00, 'Confirmed'),
-(3, 6, NULL, '2026-05-18 18:15:00', 38750.00, 'Pending');
+(3, 6, NULL, '2026-05-18 18:15:00', 38750.00, 'Confirmed'),
+(4, 6, NULL, '2026-05-18 18:15:00', 12400.00, 'Pending'),
+(5, 6, NULL, '2026-05-18 18:15:00', 86800.00, 'Shipped'),
+(6, 6, NULL, '2026-05-18 18:15:00', 108500.00, 'Delivered'),
+(7, 6, NULL, '2026-05-18 18:15:00', 153450.00, 'Confirmed'),
+(8, 6, NULL, '2026-05-18 18:15:00', 148800.00, 'Pending'),
+(9, 6, NULL, '2026-05-18 18:15:00', 199020.00, 'Pending'),
+(10, 6, NULL, '2026-05-18 18:15:00', 248000.00, 'Pending'),
+(11, 6, NULL, '2026-05-19 18:15:00', 46500.00, 'Pending');
 
 -- --------------------------------------------------------
 
@@ -145,7 +161,15 @@ INSERT INTO `order_items` (`order_item_id`, `order_id`, `product_id`, `quantity`
 (1, 1, 29, 2, 1550.00),
 (2, 2, 3, 1, 1395.00),
 (3, 3, 15, 20, 1240.00),
-(4, 3, 3, 10, 1395.00);
+(4, 3, 3, 10, 1395.00),
+(5, 4, 2, 10, 1240.00),
+(6, 5, 21, 80, 1085.00),
+(7, 6, 21, 100, 1085.00),
+(8, 7, 29, 99, 1550.00),
+(9, 8, 28, 80, 1860.00),
+(10, 9, 27, 107, 1860.00),
+(11, 10, 26, 100, 2480.00),
+(12, 11, 23, 100, 465.00);
 
 -- --------------------------------------------------------
 
@@ -172,7 +196,7 @@ CREATE TABLE `products` (
 
 INSERT INTO `products` (`id`, `name`, `brand_id`, `category`, `skin_type`, `key_ingredients`, `price`, `stock_quantity`, `description`, `photo_path`) VALUES
 (1, 'Squalane Cleanser', 1, 'Cleanser', 'All', 'Squalane', 1550, 100, 'A gentle cleanser that dissolves makeup and impurities without stripping the skin.', 'uploads/the-ordinary/ordinary-cleanser.jpg'),
-(2, 'Niacinamide 10% + Zinc 1%', 1, 'Serum', 'Oily', 'Niacinamide, Zinc', 1240, 100, 'Reduces the appearance of blemishes and congestion. Balances visible sebum activity.', 'uploads/the-ordinary/ordinary-niacinamide.jpg'),
+(2, 'Niacinamide 10% + Zinc 1%', 1, 'Serum', 'Oily', 'Niacinamide, Zinc', 1240, 90, 'Reduces the appearance of blemishes and congestion. Balances visible sebum activity.', 'uploads/the-ordinary/ordinary-niacinamide.jpg'),
 (3, 'Natural Moisturizing Factors+HA', 1, 'Moisturizer', 'All', 'Hyaluronic Acid, Amino Acids', 1395, 89, 'Replenishes skin surface with key proteins and fatty acids for hydration.', 'uploads/the-ordinary/ordinary-moisturizer.jpg'),
 (4, 'AHA 30% + BHA 2% Peeling Solution', 1, 'Mask', 'Oily', 'AHA, BHA, Tasmanian Pepperberry', 1705, 80, 'An exfoliating facial with AHA and BHA for improved skin radiance and clarity.', 'uploads/the-ordinary/ordinary-peeling.jpg'),
 (5, 'Hydrating Facial Cleanser', 2, 'Cleanser', 'Dry', 'Ceramides, Hyaluronic Acid', 1860, 100, 'Gentle, non-foaming cleanser that helps maintain the skin natural moisture barrier.', 'uploads/CeraVe/cerave-cleanser.jpg'),
@@ -191,15 +215,15 @@ INSERT INTO `products` (`id`, `name`, `brand_id`, `category`, `skin_type`, `key_
 (18, 'Purifying Neem Face Wash', 4, 'Cleanser', 'Oily', 'Neem, Turmeric', 620, 150, 'Soap-free face wash that purifies skin, removes excess oil and prevents pimples.', 'uploads/Himalaya/himalaya-cleanser.jpg'),
 (19, 'Refreshing & Clarifying Toner', 4, 'Toner', 'All', 'Cucumber, Witch Hazel', 775, 100, 'Refreshing toner that minimizes pores and leaves skin feeling fresh and clean.', 'uploads/Himalaya/himalaya-toner.jpg'),
 (20, 'Nourishing Skin Cream', 4, 'Moisturizer', 'Dry', 'Winter Cherry, Indian Pennywort', 930, 100, 'Rich nourishing cream that deeply moisturizes and rejuvenates dry skin.', 'uploads/Himalaya/himalaya-moisturize.jpg'),
-(21, 'Protective Sunscreen Lotion SPF 50', 4, 'Sunscreen', 'All', 'Eclipta Alba, SPF 50', 1085, 80, 'Broad spectrum sunscreen that protects skin from harmful UVA and UVB rays.', 'uploads/Himalaya/himalaya-sunscreen.jpg'),
+(21, 'Protective Sunscreen Lotion SPF 50', 4, 'Sunscreen', 'All', 'Eclipta Alba, SPF 50', 1085, 100, 'Broad spectrum sunscreen that protects skin from harmful UVA and UVB rays.', 'uploads/Himalaya/himalaya-sunscreen.jpg'),
 (22, 'Neem Face Pack', 4, 'Mask', 'Oily', 'Neem, Fuller Earth', 620, 100, 'Clay face pack that draws out impurities, controls oil and reduces blemishes.', 'uploads/Himalaya/himalaya-mask.jpg'),
-(23, 'Lip Balm Strawberry', 4, 'Lip Care', 'All', 'Strawberry, Vitamin E', 465, 150, 'Fruity lip balm that moisturizes and softens dry, chapped lips.', 'uploads/Himalaya/himalaya-lip-strawberry.jpg'),
+(23, 'Lip Balm Strawberry', 4, 'Lip Care', 'All', 'Strawberry, Vitamin E', 465, 100, 'Fruity lip balm that moisturizes and softens dry, chapped lips.', 'uploads/Himalaya/himalaya-lip-strawberry.jpg'),
 (24, 'Low pH Good Morning Gel Cleanser', 5, 'Cleanser', 'Oily', 'Tea Tree Oil, BHA', 1550, 100, 'Low pH cleanser that gently removes impurities while maintaining skin natural balance.', 'uploads/COSRX/cosrx-cleanser.jpg'),
 (25, 'AHA/BHA Clarifying Treatment Toner', 5, 'Toner', 'Oily', 'AHA, BHA, Glycolic Acid', 1705, 100, 'Exfoliating toner that removes dead skin cells and unclogs pores for clearer skin.', 'uploads/COSRX/cosrx-toner.jpg'),
 (26, 'Advanced Snail 96 Mucin Power Essence', 5, 'Serum', 'All', 'Snail Secretion Filtrate 96%', 2480, 100, 'Hydrating essence with 96% snail mucin that repairs and soothes damaged skin.', 'uploads/COSRX/cosrx-serum.jpg'),
 (27, 'Oil-Free Ultra-Moisturizing Lotion', 5, 'Moisturizer', 'Oily', 'Birch Sap, Beta-Glucan', 1860, 100, 'Lightweight, oil-free lotion that provides intense hydration without clogging pores.', 'uploads/COSRX/cosrx-moisturizer.jpg'),
-(28, 'Aloe Soothing Sun Cream SPF 50', 5, 'Sunscreen', 'Sensitive', 'Aloe Vera, SPF 50', 1860, 80, 'Soothing sunscreen with aloe vera that calms and protects sensitive skin.', 'uploads/COSRX/cosrx-sunscreen.jpg'),
-(29, 'Ultimate Nourishing Rice Overnight Spa Mask', 5, 'Mask', 'All', 'Rice Extract, Hyaluronic Acid', 1550, 98, 'Overnight mask that nourishes and brightens skin while you sleep.', 'uploads/COSRX/cosrx-mask.jpg');
+(28, 'Aloe Soothing Sun Cream SPF 50', 5, 'Sunscreen', 'Sensitive', 'Aloe Vera, SPF 50', 1860, 100, 'Soothing sunscreen with aloe vera that calms and protects sensitive skin.', 'uploads/COSRX/cosrx-sunscreen.jpg'),
+(29, 'Ultimate Nourishing Rice Overnight Spa Mask', 5, 'Mask', 'All', 'Rice Extract, Hyaluronic Acid', 1550, 100, 'Overnight mask that nourishes and brightens skin while you sleep.', 'uploads/COSRX/cosrx-mask.jpg');
 
 -- --------------------------------------------------------
 
@@ -250,7 +274,7 @@ INSERT INTO `users` (`id`, `full_name`, `username`, `dob`, `gender`, `phone`, `e
 (2, 'Krishnapoudel', 'Krishna', '2003-03-12', '', '9394384383483', 'testing@gmial.com', '$2a$10$KInM9gDUNtbXT9b2rAMS2e5fwYzEBgobqHijGhsitn72C.oG3hvFK', NULL, 'user'),
 (4, 'Admin User', 'admin', NULL, NULL, NULL, 'admin@glowvia.com', '$2a$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2uheWG/igi.', NULL, 'admin'),
 (5, 'Admin User', 'admin2', '2001-04-12', 'Male', '98473473434', 'admin2@glowvia.com', '$2a$10$v6fFXsTqLU0DBTqYLzg21emavVA4GgteIRD91rN7BMzVcminsyNNC', NULL, 'admin'),
-(6, 'abc', 'kritstha', '2015-03-11', '', '1234567890', 'abc@gmail.com', '$2a$10$BgfpjX4Bn46PtQqWd/HiQ.o7TNcOKGG3Tuy.xZRVUYVTKE68MBCTa', 'uploads/users/kritstha_Photo.jpg', 'user');
+(6, 'abc', 'kritstha', '2015-03-11', '', '1234567890', 'abc@gmail.com', '$2a$10$O0qXJ2n9BppINXYOaN/.7.VfnLVEIuL6hpMrRvuURiZxd7r2M2wj6', 'uploads/users/kritstha_Photo.jpg', 'user');
 
 --
 -- Indexes for dumped tables
@@ -344,25 +368,25 @@ ALTER TABLE `brands`
 -- AUTO_INCREMENT for table `carts`
 --
 ALTER TABLE `carts`
-  MODIFY `cart_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `cart_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `cart_items`
 --
 ALTER TABLE `cart_items`
-  MODIFY `cart_item_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `cart_item_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `order_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `order_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `order_items`
 --
 ALTER TABLE `order_items`
-  MODIFY `order_item_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `order_item_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `products`
