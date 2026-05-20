@@ -31,19 +31,29 @@ public class ProductDetailController extends HttpServlet {
         
         String productIdParam = request.getParameter("id");
 
+<<<<<<< HEAD
         /*
         Validate product id before processing request.
         Redirect user if product id is missing.
         */        
+=======
+>>>>>>> 4864428da1fba04a205413ceb9c136a448d199fe
         if (productIdParam == null || productIdParam.isEmpty()) {
             response.sendRedirect(request.getContextPath() + "/products");
             return;
         }
 
         try {
+<<<<<<< HEAD
             
             int productId = Integer.parseInt(productIdParam);
             ProductService productService = new ProductService();           
+=======
+            int productId = Integer.parseInt(productIdParam);
+            ProductService productService = new ProductService();
+
+            // Get the product by its id from the database
+>>>>>>> 4864428da1fba04a205413ceb9c136a448d199fe
             Product selectedProduct = productService.getProductById(productId);
 
             
