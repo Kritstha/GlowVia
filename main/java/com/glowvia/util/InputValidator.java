@@ -3,8 +3,8 @@ package com.glowvia.util;
 import java.util.regex.Pattern;
 
 /**
- * Reusable input validation routines. Returns a human-readable error message
- * when invalid, or {@code null} when the value is acceptable.
+  Reusable input validation routines. Returns a human-readable error message
+  when invalid, or {@code null} when the value is acceptable.
  */
 public final class InputValidator {
 
@@ -92,8 +92,8 @@ public final class InputValidator {
     }
 
     /**
-     * Escape unsafe HTML characters - used by the view-helper to embed user
-     * supplied text into a pre-rendered HTML fragment safely.
+      Escape unsafe HTML characters - used by the view-helper to embed user
+      supplied text into a pre-rendered HTML fragment safely.
      */
     public static String escapeHtml(String value) {
         if (value == null) return "";

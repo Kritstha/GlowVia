@@ -8,7 +8,7 @@ import com.glowvia.util.PasswordHasher;
 import java.util.List;
 
 /**
- * Profile management business logic.
+  Profile management business logic.
  */
 public class UserService {
 

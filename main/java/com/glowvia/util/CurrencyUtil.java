@@ -4,8 +4,8 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 
 /**
- * Prices in the database are stored in Nepalese Rupees (NPR).
- * USD seed values were converted at {@link #USD_TO_NPR} per dollar.
+  Prices in the database are stored in Nepalese Rupees (NPR).
+
  */
 public final class CurrencyUtil {
 

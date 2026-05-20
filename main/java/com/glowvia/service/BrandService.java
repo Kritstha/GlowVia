@@ -7,7 +7,7 @@ import com.glowvia.util.InputValidator;
 import java.util.List;
 
 /**
- * Business logic for brand management (admin-side).
+  Business logic for brand management (admin-side).
  */
 public class BrandService {
 

@@ -5,8 +5,8 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 /**
- * Centralized JDBC connection helper for the Glowvia database.
- * Loads the MySQL driver once and hands out fresh connections on demand.
+  Centralized JDBC connection helper for the Glowvia database.
+  Loads the MySQL driver once and hands out fresh connections on demand.
  */
 public final class DbConnection {
 
@@ -30,7 +30,7 @@ public final class DbConnection {
     }
 
     /**
-     * Open a new connection to the Glowvia database.
+      Open a new connection to the Glowvia database.
      */
     public static Connection open() throws SQLException {
         return DriverManager.getConnection(JDBC_URL, DB_USER, DB_PASS);

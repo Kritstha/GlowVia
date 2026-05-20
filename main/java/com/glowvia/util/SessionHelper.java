@@ -5,8 +5,8 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 
 /**
- * Tiny convenience layer over HttpSession to read/write the logged-in user
- * and short-lived flash messages used between redirects.
+  Tiny convenience layer over HttpSession to read/write the logged-in user
+  and short-lived flash messages used between redirects.
  */
 public final class SessionHelper {
 

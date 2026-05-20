@@ -3,9 +3,9 @@ package com.glowvia.util;
 import org.mindrot.jbcrypt.BCrypt;
 
 /**
- * Password hashing wrapper around jBCrypt.
- * Use {@link #hash(String)} when storing a new password and
- * {@link #verify(String, String)} when checking a login attempt.
+  Password hashing wrapper around jBCrypt.
+  Use {@link #hash(String)} when storing a new password and
+  {@link #verify(String, String)} when checking a login attempt.
  */
 public final class PasswordHasher {
 

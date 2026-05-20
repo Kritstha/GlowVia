@@ -11,10 +11,10 @@ import java.text.SimpleDateFormat;
 import java.util.List;
 
 /**
- * Server-side view renderer. Because the JSPs in this project rely strictly on
- * EL (no scriptlets, no JSTL, no jsp:include actions), all iteration-based
- * markup is built here and forwarded to the JSP as a single pre-rendered HTML
- * String. The JSP then prints it through ${...}.
+  Server-side view renderer. Because the JSPs in this project rely strictly on
+  EL (no scriptlets, no JSTL, no jsp:include actions), all iteration-based
+  markup is built here and forwarded to the JSP as a single pre-rendered HTML
+  String. The JSP then prints it through ${...}.
  */
 public final class ViewRenderer {
 
@@ -82,9 +82,9 @@ public final class ViewRenderer {
         return html.toString();
     }
 
-    /* ===================================================================
-     * Admin product table
-     * ================================================================ */
+    /* 
+      Admin product table
+      */
     public static String renderAdminProductRows(List<Product> products,
                                                 String contextPath) {
         if (products == null || products.isEmpty()) {
@@ -137,9 +137,9 @@ public final class ViewRenderer {
         return html.toString();
     }
 
-    /* ===================================================================
-     * Brand options for <select>
-     * ================================================================ */
+    /* 
+      Brand options for <select>
+      */
     public static String renderBrandOptions(List<Brand> brands, int selectedId) {
         StringBuilder html = new StringBuilder();
         html.append("<option value=\"\">-- Select brand --</option>");
@@ -152,9 +152,9 @@ public final class ViewRenderer {
         return html.toString();
     }
 
-    /* ===================================================================
-     * Brand admin rows
-     * ================================================================ */
+    /* 
+      Brand admin rows
+     */
     public static String renderBrandRows(List<Brand> brands, String contextPath) {
         if (brands == null || brands.isEmpty()) {
             return "<tr><td colspan=\"4\" class=\"empty-cell\">No brands yet.</td></tr>";
@@ -179,9 +179,9 @@ public final class ViewRenderer {
         return html.toString();
     }
 
-    /* ===================================================================
-     * Cart rows
-     * ================================================================ */
+    /* 
+      Cart rows
+      */
     public static String renderCartRows(List<CartItem> items, String contextPath) {
         if (items == null || items.isEmpty()) {
             return "<tr><td colspan=\"5\" class=\"empty-cell\">"
@@ -226,9 +226,9 @@ public final class ViewRenderer {
         return html.toString();
     }
 
-    /* ===================================================================
-     * Order history rows (user) and admin order rows
-     * ================================================================ */
+    /*
+      Order history rows (user) and admin order rows
+     */
     public static String renderOrderHistory(List<Order> orders, String contextPath) {
         if (orders == null || orders.isEmpty()) {
             return "<tr><td colspan=\"5\" class=\"empty-cell\">No orders yet.</td></tr>";
@@ -290,9 +290,9 @@ public final class ViewRenderer {
         return b.toString();
     }
 
-    /* ===================================================================
-     * Order detail items
-     * ================================================================ */
+    /* 
+      Order detail items
+      */
     public static String renderOrderItems(List<OrderItem> items, String contextPath) {
         if (items == null || items.isEmpty()) {
             return "<tr><td colspan=\"4\" class=\"empty-cell\">No items</td></tr>";
@@ -314,9 +314,9 @@ public final class ViewRenderer {
         return html.toString();
     }
 
-    /* ===================================================================
-     * Admin user rows
-     * ================================================================ */
+    /* 
+     Admin user rows
+      */
     public static String renderUserRows(List<User> users) {
         if (users == null || users.isEmpty()) {
             return "<tr><td colspan=\"6\" class=\"empty-cell\">No users found.</td></tr>";

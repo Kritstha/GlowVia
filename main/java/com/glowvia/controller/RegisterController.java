@@ -31,23 +31,23 @@ public class RegisterController extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
     /*
-     * This is the register service class
-     * It handles all database operations for registration
-     * like checking if username or email is already taken
+      This is the register service class
+      It handles all database operations for registration
+      like checking if username or email is already taken
      */
     private RegisterService registerService;
 
     /*
-     * This method runs when the servlet starts up
-     * It initializes the register service so it is ready to use
+      This method runs when the servlet starts up
+      It initializes the register service so it is ready to use
      */
     public void init() throws ServletException {
         this.registerService = new RegisterService();
     }
 
     /*
-     * This method runs when the customer visits the register page
-     * It simply forwards to the register JSP page to show the form
+      This method runs when the customer visits the register page
+      It simply forwards to the register JSP page to show the form
      */
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -55,8 +55,8 @@ public class RegisterController extends HttpServlet {
     }
 
     /*
-     * This method runs when the customer submits the registration form
-     * It validates all the form fields and saves the new user to the database
+      This method runs when the customer submits the registration form
+      It validates all the form fields and saves the new user to the database
      */
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -126,8 +126,8 @@ public class RegisterController extends HttpServlet {
             }
 
             /*
-             * This block checks if a profile image was uploaded
-             * Image upload is optional so if no image is uploaded it uses the default
+              This block checks if a profile image was uploaded
+              Image upload is optional so if no image is uploaded it uses the default
              */
             Part userImagePart = null;
             try {
@@ -173,9 +173,9 @@ public class RegisterController extends HttpServlet {
     }
 
     /*
-     * This method handles uploading the profile image to the server
-     * It saves the image in the uploads/users folder
-     * If no image is uploaded it returns the default image path
+      This method handles uploading the profile image to the server
+      It saves the image in the uploads/users folder
+      If no image is uploaded it returns the default image path
      */
     private String handleImageUpload(HttpServletRequest request, String username)
             throws IOException, ServletException {
@@ -210,8 +210,8 @@ public class RegisterController extends HttpServlet {
     }
 
     /*
-     * This method creates a new User object with all the registration details
-     * It sets all the user fields and returns the user object
+      This method creates a new User object with all the registration details
+      It sets all the user fields and returns the user object
      */
     private User createUser(String fullName, String username, String email,
                             String phone, String dob, String gender,
@@ -230,8 +230,8 @@ public class RegisterController extends HttpServlet {
     }
 
     /*
-     * This method gets the file extension from the uploaded image filename
-     * If no extension is found it returns .png as the default extension
+      This method gets the file extension from the uploaded image filename
+      If no extension is found it returns .png as the default extension
      */
     private String getFileExtension(String fileName) {
         return fileName == null || !fileName.contains(".") ?
@@ -239,8 +239,8 @@ public class RegisterController extends HttpServlet {
     }
 
     /*
-     * This method sets an error message in the session
-     * and redirects the customer back to the register page
+      This method sets an error message in the session
+      and redirects the customer back to the register page
      */
     private void setErrorAndRedirect(HttpServletRequest request,
                                      HttpServletResponse response,

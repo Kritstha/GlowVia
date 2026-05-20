@@ -12,9 +12,9 @@ import jakarta.servlet.http.HttpSession;
 import java.io.IOException;
 
 /*
- * This controller handles the customer review submission
- * It is mapped to the /review/add URL
- * Logged in customers can submit a review for a product they have purchased
+  This controller handles the customer review submission
+  It is mapped to the /review/add URL
+  Logged in customers can submit a review for a product they have purchased
  */
 @WebServlet("/review/add")
 public class ReviewController extends HttpServlet {
@@ -22,15 +22,15 @@ public class ReviewController extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
     /*
-     * This is the review service class
-     * It handles all database operations related to reviews
+      This is the review service class
+      It handles all database operations related to reviews
      */
     private ReviewService reviewService = new ReviewService();
 
     /*
-     * This method runs when the customer submits a review form
-     * It validates the review and saves it to the database
-     * Each customer can only leave one review per product
+      This method runs when the customer submits a review form
+      It validates the review and saves it to the database
+      Each customer can only leave one review per product
      */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -69,8 +69,8 @@ public class ReviewController extends HttpServlet {
             }
 
             /*
-             * Check if the customer has already reviewed this product
-             * Each customer is only allowed to leave one review per product
+              Check if the customer has already reviewed this product
+              Each customer is only allowed to leave one review per product
              */
             if (reviewService.hasUserReviewed(productId, currentUser.getId())) {
                 session.setAttribute("error", "You have already reviewed this product.");

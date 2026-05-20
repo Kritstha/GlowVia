@@ -16,10 +16,10 @@ import java.util.List;
 import java.util.Map;
 
 /*
- * This controller handles the product detail page
- * It is mapped to the /product URL
- * When customer clicks on a product it shows the full details
- * including description, price, reviews and add to cart form
+  This controller handles the product detail page
+  It is mapped to the /product URL
+  When customer clicks on a product it shows the full details
+  including description, price, reviews and add to cart form
  */
 @WebServlet("/product")
 public class ProductDetailController extends HttpServlet {
@@ -27,9 +27,9 @@ public class ProductDetailController extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
     /*
-     * This method runs when the customer clicks on a product to view its details
-     * It gets the product from the database along with its reviews
-     * and checks if the current user has already reviewed this product
+      This method runs when the customer clicks on a product to view its details
+      It gets the product from the database along with its reviews
+      and checks if the current user has already reviewed this product
      */
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -57,8 +57,8 @@ public class ProductDetailController extends HttpServlet {
             if (selectedProduct != null) {
 
                 /*
-                 * Get all reviews for this product from the database
-                 * Reviews are shown at the bottom of the product detail page
+                  Get all reviews for this product from the database
+                  Reviews are shown at the bottom of the product detail page
                  */
                 ReviewService reviewService = new ReviewService();
                 List<Map<String, Object>> reviews = reviewService.getReviewsByProductId(productId);
@@ -68,8 +68,8 @@ public class ProductDetailController extends HttpServlet {
                 User currentUser = (User) session.getAttribute("currentUser");
 
                 /*
-                 * Check if the current user has already reviewed this product
-                 * If yes the review form will be hidden so they cannot review twice
+                  Check if the current user has already reviewed this product
+                  If yes the review form will be hidden so they cannot review twice
                  */
                 boolean hasReviewed = false;
                 if (currentUser != null) {
