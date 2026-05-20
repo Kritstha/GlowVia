@@ -34,20 +34,16 @@ public class ProductDetailController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 
-        // Get the product id from the URL parameter
+        
         String productIdParam = request.getParameter("id");
 
-        // If no product id provided redirect to products page
         if (productIdParam == null || productIdParam.isEmpty()) {
             response.sendRedirect(request.getContextPath() + "/products");
             return;
         }
 
         try {
-            // Convert the product id from string to integer
             int productId = Integer.parseInt(productIdParam);
-
-            // Create product service to get the product from the database
             ProductService productService = new ProductService();
 
             // Get the product by its id from the database
